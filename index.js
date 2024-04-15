@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 // Configure CORS to allow requests from http://localhost:3000
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: 'https://student-record-frontend-lemon.vercel.app'
 }));
 
 const storage = multer.diskStorage({
