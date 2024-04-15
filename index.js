@@ -1,17 +1,20 @@
-// app.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
-// const studentRoutes = require('./routes/studentRoutes');
-const studentRoutes=require('./Routes/studentRoutes')
+const studentRoutes = require('./Routes/studentRoutes');
 const csvRoutes = require('./Routes/csvRoutes');
 
 const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+
+// Enable CORS and configure it to allow requests from your frontend domain
+app.use(cors({
+  origin: 'https://student-record-frontend-v2wc.vercel.app',
+  credentials: true // If you're using cookies or authorization headers
+}));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
