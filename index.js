@@ -1,17 +1,17 @@
+// app.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
-const studentRoutes = require('./Routes/studentRoutes');
+// const studentRoutes = require('./routes/studentRoutes');
+const studentRoutes=require('./Routes/studentRoutes')
 const csvRoutes = require('./Routes/csvRoutes');
 
 const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({
-  origin: 'https://661d88f25b69072f3185da5f--amazing-tanuki-de4b20.netlify.app'
-}));
+app.use(cors());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -24,9 +24,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 // Routes
 app.use('/api/students', studentRoutes);
 app.use('/api/csv', csvRoutes);
+
 
 // Start server
 const PORT = process.env.PORT || 3001;
