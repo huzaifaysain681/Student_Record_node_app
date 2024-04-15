@@ -4,7 +4,6 @@ const router = express.Router();
 const csvController = require('../Controllers/csvController');
 const multer = require('multer');
 
-// Set up multer for handling file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -14,7 +13,15 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+  storage: storage,
+  // Optional: Handle multer errors
+  onError: function(err, next) {
+    console.error('Multer error:', err);
+    next(err);
+  }
+});
+
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {
