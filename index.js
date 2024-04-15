@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const cors = require('cors'); // Temporarily comment out or remove the cors middleware
+const cors = require('cors'); 
 const multer = require('multer');
 const studentRoutes = require('./Routes/studentRoutes');
 const csvRoutes = require('./Routes/csvRoutes');
@@ -10,8 +10,8 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-// Temporarily disable CORS for testing purposes
-// app.use(cors());
+
+app.use(cors());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
