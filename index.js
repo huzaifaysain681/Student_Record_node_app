@@ -10,8 +10,10 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-
-app.use(cors());
+// Configure CORS to allow requests from http://localhost:3000
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
