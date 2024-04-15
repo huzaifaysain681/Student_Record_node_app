@@ -1,13 +1,24 @@
-// controllers/csvController.js
 const csv = require('csv-parser');
 const fs = require('fs');
+const path = require('path'); // Import the path module
 const db = require('../firebaseConfig');
 
 const Student = db.collection('students');
 
+// Function to ensure the uploads directory exists
+const ensureUploadsDirectory = () => {
+  const uploadDir = path.join(__dirname, '..', 'uploads'); // Path to uploads directory
+  if (!fs.existsSync(uploadDir)) { // Check if the directory exists
+    fs.mkdirSync(uploadDir); // If not, create the directory
+  }
+};
+
 // Import CSV file and save data to Firebase
 exports.importCSV = async (req, res) => {
   try {
+    // Ensure that uploads directory exists
+    ensureUploadsDirectory();
+
     // Check if a file was uploaded
     if (!req.file) {
       return res.status(400).json({ error: 'No CSV file uploaded' });
