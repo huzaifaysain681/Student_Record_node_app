@@ -9,9 +9,7 @@ const Student = db.collection('students');
 // Import CSV file and save data to Firebase
 exports.importCSV = async (req, res) => {
   try {
-    // Ensure that uploads directory exists
-    ensureUploadsDirectory();
-
+ 
     // Check if a file was uploaded
     if (!req.file) {
       return res.status(400).json({ error: 'No CSV file uploaded' });
